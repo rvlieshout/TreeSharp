@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-
-namespace TreeSharp
+﻿namespace TreeSharp.Example
 {
-    internal class TreeExample
+    using System;
+    using System.Threading;
+    using Action = TreeSharp.Action;
+
+    internal static class TreeExample
     {
-        private static Composite ExampleTree()
+        public static Composite ExampleTree()
         {
             // This allows for quick prototyping of behaviors without needing to override the composite types
             // to implement simple logic. More advanced logic may require overrides to handle them.
@@ -21,7 +19,7 @@ namespace TreeSharp
         }
 
 
-        private static void WalkTree(Composite root, object rootContext = null)
+        public static void WalkTree(Composite root, object rootContext = null)
         {
             // This function is meant as an EXAMPLE ONLY!
             // It is not the best way to handle walking the tree, but will suffice for simple usages.

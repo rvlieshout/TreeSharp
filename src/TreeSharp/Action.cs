@@ -24,6 +24,8 @@ using System.Collections.Generic;
 
 namespace TreeSharp
 {
+    using Example.Annotations;
+
     public delegate RunStatus ActionDelegate(object context);
 
     public delegate void ActionSucceedDelegate(object context);
@@ -48,8 +50,10 @@ namespace TreeSharp
             SucceedRunner = action;
         }
 
+        [CanBeNull]
         public ActionDelegate Runner { get; private set; }
 
+        [CanBeNull]
         public ActionSucceedDelegate SucceedRunner { get; private set; }
 
         /// <summary>

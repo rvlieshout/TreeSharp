@@ -24,9 +24,11 @@ using System.Collections.Generic;
 
 namespace TreeSharp
 {
+    using Example.Annotations;
+
     public abstract class GroupComposite : Composite
     {
-        protected GroupComposite(params Composite[] children)
+        protected GroupComposite([NotNull] params Composite[] children)
         {
             Children = new List<Composite>(children);
             foreach (Composite composite in Children)
@@ -38,6 +40,7 @@ namespace TreeSharp
             }
         }
 
+        [NotNull]
         public List<Composite> Children { get; set; }
 
         public Composite Selection { get; protected set; }

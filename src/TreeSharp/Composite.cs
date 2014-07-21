@@ -20,18 +20,18 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-
 namespace TreeSharp
 {
+    using System;
+    using System.Collections.Generic;
+    using Example.Annotations;
+
     /// <summary>
     ///   The base class of the entire behavior tree system.
     ///   Nearly all branches derive from this class.
     /// </summary>
     public abstract class Composite : IEquatable<Composite>
     {
-        public bool markforremoval = false;
         protected static readonly object Locker = new object();
 
         private IEnumerator<RunStatus> _current;
@@ -98,11 +98,11 @@ namespace TreeSharp
             {
                 return true;
             }
-            if (obj.GetType() != typeof(Composite))
+            if (obj.GetType() != typeof (Composite))
             {
                 return false;
             }
-            return Equals((Composite)obj);
+            return Equals((Composite) obj);
         }
 
         /// <summary>
@@ -127,9 +127,10 @@ namespace TreeSharp
             return !Equals(left, right);
         }
 
-        public abstract IEnumerable<RunStatus> Execute(object context);
+        [NotNull]
+        public abstract IEnumerable<RunStatus> Execute([CanBeNull] object context);
 
-        public RunStatus Tick(object context)
+        public RunStatus Tick([CanBeNull] object context)
         {
             lock (Locker)
             {
@@ -159,13 +160,13 @@ namespace TreeSharp
             }
         }
 
-        public virtual void Start(object context)
+        public virtual void Start([CanBeNull] object context)
         {
             LastStatus = null;
             _current = Execute(context).GetEnumerator();
         }
 
-        public virtual void Stop(object context)
+        public virtual void Stop([CanBeNull] object context)
         {
             Cleanup();
             if (_current != null)
@@ -198,29 +199,30 @@ namespace TreeSharp
 
         protected abstract class CleanupHandler : IDisposable
         {
-            protected CleanupHandler(Composite owner, object context)
+            protected CleanupHandler([NotNull] Composite owner, [CanBeNull] object context)
             {
                 Owner = owner;
                 Context = context;
             }
 
+            [NotNull]
             protected Composite Owner { get; set; }
 
+            [CanBeNull]
             private object Context { get; set; }
 
-            private bool IsDisposed { get; set; }
+            private bool _isDisposed;
 
             #region IDisposable Members
 
             public void Dispose()
             {
-                if (!IsDisposed)
+                if (_isDisposed) return;
+
+                lock (Locker)
                 {
-                    lock (Locker)
-                    {
-                        IsDisposed = true;
-                        DoCleanup(Context);
-                    }
+                    _isDisposed = true;
+                    DoCleanup(Context);
                 }
             }
 
