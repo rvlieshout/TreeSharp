@@ -1,5 +1,0 @@
-D:\dev\ts\trunk\TreeSharp\bin\Debug\TreeSharp.dll
-D:\dev\ts\trunk\TreeSharp\bin\Debug\TreeSharp.pdb
-D:\dev\ts\trunk\TreeSharp\obj\Debug\TreeSharp.csprojResolveAssemblyReference.cache
-D:\dev\ts\trunk\TreeSharp\obj\Debug\TreeSharp.dll
-D:\dev\ts\trunk\TreeSharp\obj\Debug\TreeSharp.pdb
