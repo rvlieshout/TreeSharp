@@ -1,31 +1,9 @@
-﻿#region License
-
-// A simplistic Behavior Tree implementation in C#
-// Copyright (C) 2010-2011 ApocDev apocdev@gmail.com
-// 
-// This file is part of TreeSharp
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace TreeSharp
+﻿namespace TreeSharp
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     ///   The base selector class. This will attempt to execute all branches of logic, until one succeeds. 
     ///   This composite will fail only if all branches fail as well.
@@ -58,7 +36,8 @@ namespace TreeSharp
     /// </summary>
     public class ProbabilitySelector : Selector
     {
-        public ProbabilitySelector(params ProbabilitySelection[] children) : base(children.Select(c => c.Branch).ToArray())
+        public ProbabilitySelector(params ProbabilitySelection[] children)
+            : base(children.Select(c => c.Branch).ToArray())
         {
             PossibleBranches = children.OrderBy(c => c.ChanceToExecute).ToArray();
             Randomizer = new Random();
