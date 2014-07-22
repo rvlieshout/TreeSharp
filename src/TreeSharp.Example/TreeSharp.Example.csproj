@@ -51,7 +51,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TreeSharp\TreeSharp.csproj">
+    <ProjectReference Include="..\TreeSharp\TreeSharp.csproj">
       <Project>{8bfdd80e-9e64-4386-b676-ed3cfdf1b095}</Project>
       <Name>TreeSharp</Name>
     </ProjectReference>
